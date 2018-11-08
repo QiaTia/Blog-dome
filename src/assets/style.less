@@ -1,0 +1,122 @@
+/*公共样式--开始*/
+html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input, textarea, th, td, select {
+  margin: 0;
+  padding: 0;
+}
+*{
+  box-sizing: border-box;
+}
+html, body {
+  min-height: 100%;
+}
+body {
+  font-family: "Microsoft YaHei";
+  color: #1a1a1a;
+  font-family: Comic Sans MS,sans-serif,Hiragino Sans GB,Microsoft YaHei,WenQuanYi Micro Hei;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.75;
+  cursor: url(//tia.nos-eastchina1.126.net/public/qiatia/mouse.cur),auto;
+}
+a{
+  text-decoration: none;
+  color: #999;
+}
+a:hover,li:hover,button:hover{cursor: url(//tia.nos-eastchina1.126.net/public/qiatia/mouseH.cur),pointer}
+@font-face {
+  font-family: 'icon-font';  /* project id 843948 */
+  src: url('//at.alicdn.com/t/font_843948_1djwjht7d44.eot');
+  src: url('//at.alicdn.com/t/font_843948_1djwjht7d44.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_843948_1djwjht7d44.woff') format('woff'),
+  url('//at.alicdn.com/t/font_843948_1djwjht7d44.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_843948_1djwjht7d44.svg#iconfont') format('svg');
+}
+.icon{
+  font-family: 'icon-font' !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: .2px;
+  -moz-osx-font-smoothing: grayscale;
+  &.to90{
+    display: inline-block;
+    transform: rotate(90deg)
+  }
+  &.to180{
+    display: inline-block;
+    transform: rotate(180deg)
+  }
+  &.to270{
+    display: inline-block;
+    transform: rotate(270deg)
+  }
+}
+.typo{
+  line-height: 1.8;
+  a{
+    background:none,none,linear-gradient(-180deg,#42b983 -2px,#42b983 2px) no-repeat,none;
+    background-position:center bottom;
+    background-size:0 1px,1px 0,0 1px,1px 0;
+    transition:ease-in .2s;
+    text-decoration: none;
+    display: inline-block;
+    color: #2c3e50;
+    padding: 0 3px 3px 3px; 
+  }
+  a:hover{
+    background-size:0% 0px,0px 0%,100% 2px,0px 0%;
+  }
+  img{
+    max-width: 100%;
+  }
+}
+.container{
+  padding-right: 8px;
+  padding-left: 8px;
+  width: 100%;
+  margin: 0 auto;
+  padding-right:0px;
+  padding-left:0px;
+  max-width: 1280px;
+}
+@media (min-width:600px){.container{padding-right:8px;padding-left:8px;width:96%!important;}}
+@media (min-width:1024px){.container{padding-right:8px;padding-left:8px;width:92%!important;}}
+@media (max-width:600px){
+  .footer{.foot{.foot-about{width: 100%!important;}}}
+}
+.tag-item{
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 10px;
+  color: #fff;
+  height: 18px;
+  line-height: 18px;
+  background: #ff945c;
+  padding: 0 5px 0 10px!important;
+  position: relative;
+  border-radius: 0 5px 5px 0;
+  margin: 0px 5px 0px 5px;
+  font-family: Menlo,Monaco,Andale Mono,lucida console,Courier New,monospace;
+  &::before{
+    content: " ";
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: 0;
+    left: -18px;
+    border: 9px solid transparent;
+    border-right-color: #ff945c;
+  }
+  &:after {
+    content: " ";
+    width: 4px;
+    height: 4px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.3);
+    position: absolute;
+    top: 7px;
+    left: 2px;
+}
+}
