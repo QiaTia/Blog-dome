@@ -10,12 +10,21 @@
           :key="index" 
           :item="item"></articles>
       </div>
-      <div class="apply-list col-md-4"></div>
+      <div class="col-md-4">
+        <el-aside></el-aside>
+      </div>
     </div>
   <!-- page分页 -->
     <div class="footer-wrapper">
       <div class="page-list">
-        <router-link class="page-item" v-for="(item, index) in pages" :key="index" :to="'./'+item">{{item}}</router-link>
+        <el-pagination
+          layout="prev, pager, next"
+          @current-change="handleCurrentChange"
+          :total="63"
+          :current-page="currentpages"
+          :page-size="12">
+          </el-pagination>
+        <!-- <router-link class="page-item" v-for="(item, index) in pages" :key="index" :to="'/page/'+item">{{item}}</router-link> -->
       </div>
     </div>
  </div>
@@ -24,32 +33,72 @@
 <script>
 import articles from '@/components/home/article.vue'
 import banner from '@/components/home/banner.vue'
+import elAside from '@/components/home/aside.vue'
  export default {
   data () {
      return {
       articles: [
         {
-          id:'1',
-          title:'QiaTia test articles',
-          tag:'PHP',
-          time:'2018-10-25',
-          reply:'3',
-          flow:'5',
-          contents:'QiaTia test articles...'
+          id:'',
+          title:'数据加载中, 请稍等...',
+          tag:'wait',
+          time:'2016-06-06',
+          reply:'0',
+          flow:'0',
+          contents:'数据加载中, 请稍等片刻...'
+        },{
+          id:'',
+          title:'数据加载中, 请稍等...',
+          tag:'wait',
+          time:'2016-06-06',
+          reply:'0',
+          flow:'0',
+          contents:'数据加载中, 请稍等片刻...'
+        },{
+          id:'',
+          title:'数据加载中, 请稍等...',
+          tag:'wait',
+          time:'2016-06-06',
+          reply:'0',
+          flow:'0',
+          contents:'数据加载中, 请稍等片刻...'
+        },{
+          id:'',
+          title:'数据加载中, 请稍等...',
+          tag:'wait',
+          time:'2016-06-06',
+          reply:'0',
+          flow:'0',
+          contents:'数据加载中, 请稍等片刻...'
+        },{
+          id:'',
+          title:'数据加载中, 请稍等...',
+          tag:'wait',
+          time:'2016-06-06',
+          reply:'0',
+          flow:'0',
+          contents:'数据加载中, 请稍等片刻...'
         }
        ],
-      pages: [1,2,3,4,5,6]
+      currentpages: 1
      }
   },
   components: {
     articles,
-    banner
+    banner,
+    elAside
    },
   methods:{
-    // codeing
+    // 分页点击
+    handleCurrentChange(val) {
+      this.$router.push({ path:`/page/${val}`})
+      //console.log(`当前页: ${val}`);
+    }, 
+    // 数据加载
     object_list(){
       this.i = (this.$route.params.i)?this.$route.params.i:1
-      this.$ajax.get('https://qiatia.cn/api/?articles='+this.i).then((response)=>{
+      this.currentpages = this.i
+      this.$ajax.get('?articles='+this.i).then((response)=>{
         this.articles = response.data
         //window.scroll(0, 0)
       }).catch((error)=> {
@@ -57,7 +106,7 @@ import banner from '@/components/home/banner.vue'
       })
     }
   },
-   watch: {
+  watch: {
     //监听路由，只要路由有变化(路径，参数等变化)都有执行下面的函数，你可以
     $route: {
       handler: function (val, oldVal) {
@@ -71,13 +120,14 @@ import banner from '@/components/home/banner.vue'
   },
   created() {
     this.object_list()
+    // 获取古诗词
     this.$ajax.get('https://api.gushi.ci/all.json').then((response)=>{
       this.$notify({
         title: response.data.author,
         message: response.data.content
       })
-    }).then((error)=>{
-      console.error(error)
+    }).catch((error)=>{
+      console.log(error)
     })
   }
  }

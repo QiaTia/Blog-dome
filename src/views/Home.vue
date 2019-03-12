@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <topNav msg="this hi"/>
+    <topNav></topNav>
     <transition :name="transitionName">
       <router-view class="child-view"/>
     </transition>
@@ -19,7 +19,9 @@ export default {
   name: 'home',
   data(){
     return{
-      transitionName: 'slide-left'
+      transitionName: 'slide-left',
+      isLoginIn: this.$store.state.user.name==undefined,
+      userInfo: this.$store.state.user
     }
   },
   components: {

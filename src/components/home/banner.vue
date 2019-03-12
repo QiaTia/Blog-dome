@@ -57,7 +57,7 @@
   created (){
     this.$ajax.get('https://qiatia.cn/api/?banner').then((response)=>{
       this.banner = response.data
-    }).then((error)=>{
+    }).catch((error)=>{
       console.log(error)
     })
     this.play()

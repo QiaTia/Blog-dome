@@ -12,9 +12,12 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home,
+      meta:{
+        title:'QiaTia`小站'
+      },
       children:[
         {
-          path: '/:i',
+          path: '/page/:i',
           name: 'page',
           component: () => import( './views/home/'),
           children:[]

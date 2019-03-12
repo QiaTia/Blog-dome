@@ -8,7 +8,8 @@
           <!-- <li><a href="/"><img src="//i.qiatia.cn/public/qiatia/QiaTia.png" style="height:32px;border: 0;"></a></li> -->
           <li v-for="(item, index) in meun"  @click="toggleRightMeun" :key="index"><router-link :to="item.href">{{ item.name }}</router-link></li>
           <li @click="toggleBar"><a href="javascript:;"><span class="icon">&#xe651;</span></a></li>
-          <!-- <li><a href="javascript:;" @click="toggleLogin">登录</a></li> -->
+          <li v-if="isLoginIn"><a href="javascript:;" @click="touchUserInfo">{{ $store.state.user.name }}</a></li>
+          <li v-else><a href="javascript:;" @click="toggleLogin">登录</a></li>
         </ul>
       </transition>
     </nav>
@@ -25,7 +26,8 @@
     <transition name="fade">
       <div class="fix-login" v-show="isLogin" @click="toggleLogin">
         <login class="login-wrapper"
-          :toggle-login='toggleLogin'></login>
+          :toggle-login='toggleLogin'
+          :getLoginInfo='getLoginInfo'></login>
       </div>
     </transition>
   </div>
@@ -35,7 +37,7 @@
 import login from '@/components/home/login.vue'
 
 export default {
-  name: 'HelloWorld',
+  name: 'topNav',
   data(){
     return {
       meun:[
@@ -52,16 +54,15 @@ export default {
           href:'/tag/随笔'
         }
       ],
-      isLogin: false,
       isBar: false,
       searchVal:'',
       cateVal:'',
       isRightMeun: false,
-      isMax:true
+      isMax:true,
+      isLogin:false,
+      isLoginIn: !this.$store.state.user.name==undefined,
+      userInfo: this.$store.state.user
     }
-  },
-  props: {
-    msg: String,
   },
   components: {
     login
@@ -84,22 +85,53 @@ export default {
     },
     toggleRightMeun(){
       this.isRightMeun = !this.isRightMeun
+    },
+    // 获取登陆信息
+    getLoginInfo(){
+      this.$ajax.get('?loginUserInfo').then((response)=>{
+        if(response.data.status == 200){
+          // 已经登陆
+          this.$store.commit('setUserInfo', response.data.info)
+          this.isLoginIn = true
+          // console.log(this.$store.state.user)
+        }else{
+          // 暂未登陆
+          console.log(response.data, this.isLoginIn)
+        }
+      }).catch((error)=>{
+        console.log(error)
+      })
+    },
+    touchUserInfo(){
+      //console.log(this.userInfo)
+      this.$message({
+        message: '欢迎回来! '+this.userInfo.name,
+        type: 'success'
+      })
     }
   },
   mounted () {
     const that = this
     window.onresize = () => {
-      window.screenWidth = document.body.clientWidth
+      that.screenWidth = document.body.clientWidth
       if(that.screenWidth>600){
         this.isMax = true
       }else{
         this.isMax = false
       }
     }
-  }
+    that.screenWidth = document.body.clientWidth
+    if(that.screenWidth>600){
+      this.isMax = true
+    }else{
+      this.isMax = false
+    }
+    this.getLoginInfo()
+  },
   // watch: {
-  //   screenWidth (val) {
-  //     this.screenWidth = val
+  //   $route: function (){
+  //     this.getLoginInfo()
+  //     // 路由发生变化
   //   }
   // }
 }
@@ -155,7 +187,7 @@ export default {
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, .45);
-    z-index: 5999;
+    z-index: 1999;
     .login-wrapper{
       margin-top: 66px;
     }

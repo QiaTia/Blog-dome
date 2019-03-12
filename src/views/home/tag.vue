@@ -1,14 +1,16 @@
 <template>
  <div class="container typo">
    <!-- 文章列表。主题内容区域 -->
-    <div class="col"> 
+    <div class="col"  v-loading.fullscreen.lock="fullscreenLoading"> 
       <div class="article-list col-md-8">
         <articles
           v-for="(item, index) in articles"
           :key="index" 
           :item="item"></articles>
       </div>
-      <div class="apply-list col-md-4"></div>
+      <div class="col-md-4">
+        <el-aside></el-aside>
+      </div>
     </div>
     <!-- page分页 -->
     <div class="footer-wrapper">
@@ -19,16 +21,19 @@
 
 <script>
 import articles from '@/components/home/article.vue'
+import elAside from '@/components/home/aside.vue'
   export default {
    data () {
      return {
       tag: '',
       articles: [],
-      page:1
+      page:1,
+      fullscreenLoading: true
      }
   },
   components: {
-    articles
+    articles ,
+    elAside
   },
   methods: {
     nextPage(){
@@ -37,14 +42,16 @@ import articles from '@/components/home/article.vue'
     },
     object_list(){
       this.tag = this.$route.params.i
-      this.$ajax.get('https://qiatia.cn/api/?tag='+this.tag+'&page='+this.page).then((response)=>{
+      this.$ajax.get('?tag='+this.tag+'&page='+this.page).then((response)=>{
         if(response.data === null){
           this.$message({
             message: '已经没有跟多啦！',
             type: 'warning'
           });
+        }else{
+          this.articles = this.articles.concat(response.data)
         }
-        this.articles = this.articles.concat(response.data)
+        this.fullscreenLoading = false
       }).catch((error)=> {
         console.log(error)
       })

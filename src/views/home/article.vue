@@ -1,5 +1,5 @@
 <template>
- <div class="article container">
+ <div class="article container" v-loading.fullscreen.lock="fullscreenLoading">
    <header class="article-header">
     <h1>{{ article.title }}</h1>
     <div class="entry-meta" style="margin-top:16px;">
@@ -22,7 +22,8 @@ export default {
     return {
        i:'',
        replyVal:'',
-       article:[]
+       article:[],
+       fullscreenLoading: true
      }
   },
   components: {
@@ -30,8 +31,9 @@ export default {
   },
   created() {
     this.i = this.$route.params.i
-    this.$ajax.get('https://qiatia.cn/api/?article='+this.i).then((response)=>{
+    this.$ajax.get('/?article='+this.i).then((response)=>{
       this.article = response.data
+      this.fullscreenLoading = false
     }).catch((error)=> {
       console.log(error)
     })
