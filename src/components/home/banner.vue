@@ -10,6 +10,11 @@
       </li>
     </ul>
     <a href="javascript:;"  @click="move(600,-1)"><span class="icon">&#xe65f;</span></a>
+    <!-- <el-carousel style="height:100%">
+      <el-carousel-item v-for="(item, index) in banner" :key="index">
+        <img :src="item.src" :alt="item.title">
+      </el-carousel-item>
+    </el-carousel> -->
   </div>
 </template>
 
@@ -78,6 +83,9 @@
   margin-bottom: 8px;
   height: 300px;
   overflow: hidden;
+  img{
+    height: 100%;
+  }
   position: relative;
   a{
     display: inline-block;

@@ -126,7 +126,7 @@ export default {
     }else{
       this.isMax = false
     }
-    this.getLoginInfo()
+    //this.getLoginInfo()
   },
   // watch: {
   //   $route: function (){
