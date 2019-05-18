@@ -137,16 +137,23 @@ import elAside from '@/components/home/aside.vue'
 .container{
   min-height: 70vh;
   .article-list{
-    border: solid 1px rgba(204,204,204,0.66);
-    border-radius: 4px;
+    // border: solid 1px rgba(204,204,204,0.66);
+    border: 1px solid rgba(0,0,0,.14);
+    background-color: #fff;
+    box-shadow: 0 3px 8px -6px rgba(0,0,0,.1);
+    border-radius: 8px;
     overflow: hidden;
     margin-bottom: 16px;
   }
   .footer-wrapper{
     .page-list{
       display: block;
-      padding-top: 8px;
-      padding-bottom: 32px;
+      border: 1px solid rgba(0,0,0,.14);
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 3px 8px -6px rgba(0,0,0,.1);
+      margin-top: 8px;
+      margin-bottom: 32px;
       text-align: center;
       .page-item{
         display: inline-block;

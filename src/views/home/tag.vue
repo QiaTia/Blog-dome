@@ -14,7 +14,7 @@
     </div>
     <!-- page分页 -->
     <div class="footer-wrapper">
-      <el-button @click="nextPage">load Next Page</el-button>
+      <el-button v-if="isMore" @click="nextPage">load Next Page</el-button>
     </div>
  </div>
 </template>
@@ -26,6 +26,7 @@ import elAside from '@/components/home/aside.vue'
    data () {
      return {
       tag: '',
+      isMore: true,
       articles: [],
       page:1,
       fullscreenLoading: true
@@ -44,6 +45,7 @@ import elAside from '@/components/home/aside.vue'
       this.tag = this.$route.params.i
       this.$ajax.get('?tag='+this.tag+'&page='+this.page).then((response)=>{
         if(response.data === null){
+          this.isMore = false
           this.$message({
             message: '已经没有跟多啦！',
             type: 'warning'
@@ -81,8 +83,13 @@ import elAside from '@/components/home/aside.vue'
 .container{
   padding: 16px 0;
   .article-list{
-    border: solid 1px rgba(204,204,204,0.66);
-    border-radius: 4px;
+    // border: solid 1px rgba(204,204,204,0.66);
+    // border-radius: 4px;
+
+    border: 1px solid rgba(0,0,0,.14);
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px -6px rgba(0,0,0,.1);
     overflow: hidden;
     margin-bottom: 16px;
   }

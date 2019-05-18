@@ -51,8 +51,9 @@ export default {
   .foot{
     display: block;
     flex-wrap: wrap;
+    // background-color: #ededed;
     background-color:#363533;
-    color:#bbb;
+    color:#666;
     .foot-about{
       width: calc(100% / 3);
       display: inline-block;
@@ -97,6 +98,7 @@ export default {
   }
   .copyright{
     background-color: #292929;
+    // background-color: #fafafa;
     color: #6f6e67;
     font-size: 18px;
     line-height: 36px;

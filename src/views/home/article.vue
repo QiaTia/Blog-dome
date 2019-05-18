@@ -43,6 +43,11 @@ export default {
 
 <style scoped lang='less'>
 .article{
+  border: 1px solid rgba(0,0,0,.14);
+  background-color: #fff;
+  border-radius: 8px;
+  margin: 8px auto;
+  box-shadow: 0 3px 8px -6px rgba(0,0,0,.1);
   .article-header{
     h1{
       font-size: 18px;

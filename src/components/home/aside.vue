@@ -97,15 +97,19 @@
 }
 .apply-panel{
     padding: 0;
-    border-radius: 3px;
-    border: solid 1px rgba(204, 204, 204, 0.66);
+    border-radius: 8px;
+    // border: solid 1px rgba(204, 204, 204, 0.66);
+    border: 1px solid rgba(0,0,0,.14);    
     background-color: #FFF;
+    box-shadow: 0 3px 8px -6px rgba(0,0,0,.1);
   .panel-title{
     // panl标题
     width: 100%;
     padding: .5rem;
     font-size: 1.1rem;
-    border-bottom: solid 1px rgba(204, 204, 204, 0.66);;
+    background-color: #fafafa;
+    // border-bottom: solid 1px rgba(204, 204, 204, 0.66);
+    border-bottom: 1px solid rgba(0,0,0,.1);
   }
   .panel-list{
     // panl 内容

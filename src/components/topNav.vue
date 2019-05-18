@@ -179,6 +179,7 @@ export default {
 .header{
   height:56px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
+  background-color: #fff;
   .nav-meun-wapper{display: none;}
   .fix-login{
     width: 100vw;

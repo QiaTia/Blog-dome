@@ -112,8 +112,12 @@ import elAside from '@/components/home/aside.vue'
 .container{
   padding: 16px 0;
   .article-list{
-    border: solid 1px rgba(204,204,204,0.66);
-    border-radius: 4px;
+    // border: solid 1px rgba(204,204,204,0.66);
+    // border-radius: 4px;
+    border: 1px solid rgba(0,0,0,.14);
+    background-color: #fff;
+    box-shadow: 0 3px 8px -6px rgba(0,0,0,.1);
+    border-radius: 8px;
     overflow: hidden;
     margin-bottom: 16px;
   }
