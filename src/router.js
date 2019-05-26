@@ -15,11 +15,18 @@ const router = new Router({
       meta:{ title:'QiaTia`小站' },
       children:[
         {
+          path: '/401',
+          name: '401_page',
+          component: () => import( './views/page/401'),
+          children:[],
+          meta:{ title:'404 Page - QiaTia`小站' },
+        },
+        {
           path: '/page/:i',
           name: 'page',
           component: () => import( './views/home/'),
           children:[],
-          meta:{ title:'PAGE - QiaTia`小站' },
+          meta:{ title:'Page - QiaTia`小站' },
         },
         {
           path: '/',
@@ -65,7 +72,7 @@ const router = new Router({
     },
     {
       path: "*",
-      redirect: "/"
+      redirect: "/401"
     }
   ]
 })

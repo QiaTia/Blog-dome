@@ -1,14 +1,7 @@
-/*公共样式--开始*/
-html, body, div, ul, li, h1, h2, h3, h4, h5, h6, p, dl, dt, dd, ol, form, input, textarea, th, td, select {
-  margin: 0;
-  padding: 0;
-}
-*{
-  box-sizing: border-box;
-}
-html, body {
-  min-height: 100%;
-}
+@import './style/default.less';
+@import './style/icon.less';
+@import './style/color.less';
+
 body {
   font-family: "Microsoft YaHei";
   color: #1a1a1a;
@@ -23,44 +16,17 @@ a{
   color: #999;
 }
 a:hover,li:hover,button:hover{cursor: url(//tia.nos-eastchina1.126.net/public/qiatia/mouseH.cur),pointer}
-@font-face {
-  font-family: 'icon-font';  /* project id 843948 */
-  src: url('//at.alicdn.com/t/font_843948_1djwjht7d44.eot');
-  src: url('//at.alicdn.com/t/font_843948_1djwjht7d44.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_843948_1djwjht7d44.woff') format('woff'),
-  url('//at.alicdn.com/t/font_843948_1djwjht7d44.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_843948_1djwjht7d44.svg#iconfont') format('svg');
-}
-.icon{
-  font-family: 'icon-font' !important;
-  font-size: 16px;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-stroke-width: .2px;
-  -moz-osx-font-smoothing: grayscale;
-  &.to90{
-    display: inline-block;
-    transform: rotate(90deg)
-  }
-  &.to180{
-    display: inline-block;
-    transform: rotate(180deg)
-  }
-  &.to270{
-    display: inline-block;
-    transform: rotate(270deg)
-  }
-}
+
 .typo{
   line-height: 1.8;
   a{
-    background:none,none,linear-gradient(-180deg,#42b983 -2px,#42b983 2px) no-repeat,none;
+    background:none,none,linear-gradient(-180deg,@primary-color -2px,@primary-color 2px) no-repeat,none;
     background-position:center bottom;
     background-size:0 1px,1px 0,0 1px,1px 0;
     transition:ease-in .2s;
     text-decoration: none;
     display: inline-block;
-    color: #2c3e50;
+    color: @font-color;
     padding: 0 3px 3px 3px;   
     &:hover{
       background-size:0% 0px,0px 0%,100% 2px,0px 0%;
@@ -128,7 +94,7 @@ a:hover,li:hover,button:hover{cursor: url(//tia.nos-eastchina1.126.net/public/qi
   color: #fff;
   height: 18px;
   line-height: 18px;
-  background: #ff945c;
+  background: @tag-color;
   padding: 0 5px 0 10px!important;
   position: relative;
   border-radius: 0 5px 5px 0;
@@ -142,7 +108,7 @@ a:hover,li:hover,button:hover{cursor: url(//tia.nos-eastchina1.126.net/public/qi
     top: 0;
     left: -18px;
     border: 9px solid transparent;
-    border-right-color: #ff945c;
+    border-right-color: @tag-color;
   }
   &:after {
     content: " ";

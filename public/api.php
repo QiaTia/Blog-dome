@@ -1,4 +1,12 @@
 <?php
+/*
+ * @Description: mvvw 博客网站前台api
+ * @Author: QiaTia
+ * @Date: 2019-02-20 21:38:31
+ * @LastEditors: QiaTia
+ * @GitHub: https://github.com/QiaTia/
+ * @LastEditTime: 2019-05-26 12:06:17
+ */
 header('Content-type: application/json; charset=UTF-8');
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods","POST, GET, PUT, OPTIONS, DELETE, PATCH");
@@ -51,6 +59,7 @@ if(isset($_REQUEST['articles'])){
     $contents = strip_tags($content_03);
     $con = mb_substr($contents, 0, 130,"utf-8");
     $info['contents'] =  $con.'...';;
+    $info['time'] = dataTo(intval((strtotime("now") - strtotime($info['time']))/86400));
     $info['con'] = '';
     $info['reply'] = $conn->query("SELECT * FROM  `reply` WHERE  `conid` ='".$info['id']."'")->num_rows;
     array_push($articles,$info);
@@ -226,7 +235,7 @@ if(isset($_REQUEST['reply'])){
       if($num == 0) {
         // 账户注册
         $pw = md5(123456);
-        if($name == ''||$mail == '') {
+        if($name == ''||$email == '') {
           $info['error']= '必填字段不能为空！';
           $info['status'] = 500;
           die(json_encode($info));
@@ -315,7 +324,7 @@ if(isset($_REQUEST['sendCode'])){
     $_SESSION['infoCode'] = $code = rand(1000,9999);
     // 邮件发送验证码
     $mailtitle = '来自QiaTia`小站的提示';
-    $mailcontent = '你本次登陆的验证码为:<b>'.$code.'</b>';
+    $mailcontent = '你本次登陆的验证码为: <b>'.$code.'</b>, 5分钟内有效.';
     sendMail($email,$mailtitle,$mailcontent);
   }else{
     // 已经生成验证码  取出验证码

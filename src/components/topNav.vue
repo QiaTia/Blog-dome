@@ -202,6 +202,7 @@ export default {
       width: 100%;
       padding: 0 16px;
       text-align: right;
+      background-color: #fff;
       left: 0;
       box-shadow: 0 4px 8px rgba(0, 0, 0, .15);
       li{

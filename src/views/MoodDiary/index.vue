@@ -15,7 +15,7 @@
           :key="index"
           :color="item.mood"
           :timestamp="item.time">
-          {{item.text}}
+          <span @click="speech(item.text)">{{item.text}}</span>
         </el-timeline-item>
       </el-timeline>
     </div>
@@ -38,8 +38,8 @@
         <span>关闭</span>
       </div>
     </div>
-    <div class="mask" v-if="isNewMood">
-      <form class="mood-form">
+    <div class="mask" v-if="isNewMood" @click="isNewMood = !isNewMood">
+      <form class="mood-form" @click.stop>
         <div class="form-item">
           <el-input
             type="textarea"
@@ -110,6 +110,7 @@ import topNav from '@/components/topNav.vue'
          }, 666)
        })
      },
+    //  提交新的内容
      submit() {
        if(/[\s\S]{5}/.test(this.newMood.diary)){
          this.$ajax.post('./MoodDiary.php', this.newMood).then((res)=>{
@@ -133,7 +134,7 @@ import topNav from '@/components/topNav.vue'
        //console.log(this.newMood)
      },
      scroll(){
-       return false
+      return false
      },
      cate (){
        return false
@@ -141,6 +142,34 @@ import topNav from '@/components/topNav.vue'
      close(){
        this.$router.push('/')
      },
+     speech(val){
+       this.loading = true
+       this.tex2voice(val,6).then(()=>{
+         this.loading = false
+       })
+     },
+    //  读出来
+     tex2voice(val, per){
+      return new Promise((res,reject)=>{
+        per = per?"&per="+per:'';
+        let s =document.createElement('source'),a = document.createElement('audio');
+        s.type ='audio/mp3';
+        s.src = 'https://wx.qiatia.cn/admin/config/?ttsTex='+val+per;
+        a.appendChild(s);
+        a.autoplay = true;
+        let item = 'tia'+ new Date().getTime()
+        a.setAttribute('id',item)
+        document.body.appendChild(a);
+        let voice = document.getElementById(item)
+        voice.onended = function(){
+            console.warn('播放完毕,开始销毁=>')
+            this.parentNode.removeChild(this)
+        }
+        voice.onplay= function(){
+          res()
+        }
+      })
+    },
      init() {
         this.$ajax.get('./MoodDiary.php?diary='+this.page).then((res)=>{
           this.moods = res.data
@@ -161,6 +190,7 @@ import topNav from '@/components/topNav.vue'
 .mood-diary{
   .block{
     padding: 16px;
+    padding-bottom: 66px;
   }
   .fix-bottom-action{
     position: fixed;
@@ -168,6 +198,7 @@ import topNav from '@/components/topNav.vue'
     left: 0;
     height: 61px;
     width: 100vw;
+    background-color: #fff;
     box-shadow: 0 -2px 2px rgba(0, 0, 0, .12);
     display: flex;
     align-items: center;
